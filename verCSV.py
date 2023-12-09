@@ -48,7 +48,8 @@ for item in diccionario_archivo:
         contIt=len(it['Label'])
         
         for i in range(0,contIt-1,1):
-            print(item)
+            print('\033[1m','\033[4m',item.replace('.csv',''),'\033[0m')
+            print()
             print('Label: '+it['Label'][i])
             print('Samples: '+it['# Samples'][i])
             print('Promedio: '+it['Average'][i])
@@ -64,6 +65,8 @@ for item in diccionario_archivo:
                 print('\033[41m','Cantidad de errores mayor a los parametros aceptables','\033[0m')
             else:
                 print('\033[42m','Cantidad de errores dentro de los parametros aceptables','\033[0m')
-            input()
+            print()
+            input('Enter para continuar')
             cls()
-input()
+print('Gracias por utilizarme!!')
+input('Enter para finalizar')
