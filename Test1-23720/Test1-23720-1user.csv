@@ -1,6 +1,0 @@
-Label,# Samples,Average,Min,Max,Std. Dev.,Error %,Throughput,Received KB/sec,Sent KB/sec,Avg. Bytes
-Home MAs Online,1,7652,0,7652,0.00,0.000%,.13068,35.19,0.02,275711.0
-Mas Online - Categorias - Aceites y Aderezos - Ver Todo,1,3434,0,3434,0.00,0.000%,.29121,76.33,0.05,268424.0
-Mas Online - Categorias - Lacteos - Ver Todo,1,224,0,224,0.00,0.000%,4.46429,1196.93,0.66,274547.0
-Mas Online - Categorias - Bebidas - Cervezas - Ver Todo,1,628,0,628,0.00,0.000%,1.59236,427.83,0.24,275126.0
-TOTAL,4,2984,0,7652,2964.84,0.000%,.33501,89.46,0.05,273452.0

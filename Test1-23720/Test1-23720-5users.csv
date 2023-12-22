@@ -1,6 +1,0 @@
-Label,# Samples,Average,Min,Max,Std. Dev.,Error %,Throughput,Received KB/sec,Sent KB/sec,Avg. Bytes
-Thread Group:Home MAs Online,5,441,0,871,214.97,0.000%,4.45236,1198.64,0.56,275675.6
-Thread Group:Mas Online - Categorias - Aceites y Aderezos - Ver Todo,5,1228,0,2206,687.13,0.000%,1.97550,517.68,0.31,268340.8
-Thread Group:Mas Online - Categorias - Lacteos - Ver Todo,5,629,0,1068,243.35,0.000%,2.20361,590.70,0.33,274495.2
-Thread Group:Mas Online - Categorias - Bebidas - Cervezas - Ver Todo,5,416,0,630,176.71,0.000%,2.35073,631.32,0.35,275010.2
-TOTAL,20,678,0,2206,509.60,0.000%,4.94071,1319.04,0.72,273380.5
