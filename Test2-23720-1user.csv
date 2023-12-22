@@ -1,6 +1,0 @@
-Label,# Samples,Average,Min,Max,Std. Dev.,Error %,Throughput,Received KB/sec,Sent KB/sec,Avg. Bytes
-Thread Group Test2:www.nuevodiarioweb.com.ar,1,397,0,397,0.00,0.000%,2.51889,773.25,0.31,314346.0
-Thread Group Test2:www.nuevodiarioweb.com.ar/policiales,1,177,0,177,0.00,0.000%,5.64972,1102.63,0.76,199850.0
-Thread Group Test2:www.nuevodiarioweb.com.ar/la-provincia,1,186,0,186,0.00,0.000%,5.37634,1012.04,0.73,192758.0
-Thread Group Test2:www.nuevodiarioweb.com.ar/politica,1,137,0,137,0.00,0.000%,7.29927,1402.32,0.96,196729.0
-TOTAL,4,224,0,397,101.43,0.000%,4.46927,986.04,0.59,225920.8

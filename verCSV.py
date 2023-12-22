@@ -2,21 +2,6 @@ import csv
 import os
 import subprocess
 
-class Test():
-    label=[]
-    samples=[]
-    average=[]
-    timeMin=[]
-    timeMax=[]
-    std_Dev=[]
-    error=[]
-    troughtput=[]
-    recieved_KB=[]
-    sent_KB=[]
-    avg_Bytes=[]
-    
-
-
 
 def cls():
     if  os.name in ('nt','dos'):
@@ -41,7 +26,8 @@ def ejecuciones(archivos):
     for archivo in archivos:
         os.system(rutaJMeter+'/jmeter -n -t '+rutaPruebas+'/'+archivo+' -l '+rutaPruebas+'/'+archivo.replace('.jmx','.csv'))        
 
-def archivo():
+    
+def archivoCSV():
     tests=[]
     archivos=os.listdir()
     for archivo in archivos:
@@ -49,86 +35,77 @@ def archivo():
            tests.append(archivo)
     return tests
 
-def obtenerDatos(archivo):
-    
-    with open (archivo, 'r') as file:
-            
-        pruebas=[]
+def archivoJMX():
+    tests=[]
+    archivos=os.listdir()
+    for archivo in archivos:
+        if '.jmx' in archivo:
+           tests.append(archivo)
+    return tests
+
+
+def obtenerDatosCMD(archivo):
+    with open (archivo,'r') as file:
         datos=[]
-        csv_reader = csv.reader(file)
-        test=Test()
+        prueba={}
+        csv_reader=csv.reader(file)
+        cont=1
         for item in csv_reader:
-            datos.append(item)
-            
-        cont=len(datos)
-        for i in range(1,cont,1):
-            sep=datos[i][0].split(':')
-            
-            if len(sep)==2:
-                test.label.append(sep[1])
+            if cont==1:
+                cont+=1
             else:
-                test.label.append(sep[0])
-            test.samples.append(datos[i][1])
-            test.average.append(datos[i][2])
-            test.timeMin.append(datos[i][3])
-            test.timeMax.append(datos[i][4])
-            test.std_Dev.append(datos[i][5])
-            test.error.append(datos[i][6])
-            test.troughtput.append(datos[i][7])
-            test.recieved_KB.append(datos[i][8])
-            test.sent_KB.append(datos[i][9])
-            test.avg_Bytes.append(datos[i][10])
-           
-    return test
-            
-            
-             
-     
-
-def mostrarDatos(data):
-    for item in data:
-        cont=len(data[item].label)
-        for i in range(0,cont,1):
-            print()
-            print('\033[94m','\033[2m',item,' :','\033[0m')
-            print()
-            print('\033[4m',data[item].label[i],'\033[0m')
-            print()
-            print('Muestras: '+data[item].samples[i])
-            print('Promedio: '+data[item].average[i])
-            print('Minimo: '+data[item].timeMin[i])
-            print('Maximo: '+data[item].timeMax[i])
-            
-            if float(data[item].timeMax[i])>=tiempoMax*1000:
-                print('\033[1;31m','Cantidad tiempo mayor al permitido','\033[0m')
+                datos.append(item)
+        for timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bites,sentBytes,grpThreads,allThreads,url,latency,idleTime,connect in datos:
+            if label in prueba:
+                prueba[label][0].append(timeStamp)
+                prueba[label][1].append(elapsed)
+                prueba[label][2].append(responseCode)
+                prueba[label][3].append(responseMessage)
+                prueba[label][4].append(dataType)
+                prueba[label][5].append(success)
+                prueba[label][6].append(failureMessage)
+                prueba[label][7].append(bites)
+                prueba[label][8].append(sentBytes)
+                prueba[label][9].append(grpThreads)
+                prueba[label][10].append(allThreads)
+                prueba[label][12].append(latency)
+                prueba[label][13].append(idleTime)
+                prueba[label][14].append(connect)
             else:
-                print('Tiempo dentro de los parametros normales')
-            print('Std Dev: '+data[item].std_Dev[i])
-            print('Error: '+data[item].error[i])
+                prueba[label]=[[timeStamp],[elapsed],[responseCode],[responseMessage],[dataType],[success],[failureMessage],[bites],[sentBytes],[grpThreads],[allThreads],[url],[latency],[idleTime],[connect]]      
+          
+        
+        for item in prueba:
+            print('\33[3;32m'+item+'\33[0m')
+            print()
+            sum=0
+            print('\33[4m'+'Latency values:'+'\033[0m ',end='')
+            for num in prueba[item][12]:
+                print(num, end=' ')
+                sum+=float(num)
+            print()
+            print()
+            print('\33[4m'+'Latency average:'+'\033[0m ',sum/len(prueba[item][12]))
+            print()
+            sum=0
+            print('\33[4m'+'Elapsed values:'+'\033[0m ', end='')
+            for num in prueba[item][1]:
+                print(num, end=' ')
+                sum+=float(num)
+            print()
+            print()
+            print('\33[4m'+'Elapsed average:'+'\033[0m ',sum/len(prueba[item][1]))
             
-            if float(data[item].error[i].replace('%',''))>=errorMax:
-                print('\033[1;31m','Cantidad de errores mayor al permitido','\033[0m')
-            else:
-                print('Errores dentro de los parametros normales')    
             input()
-            cls()
-                
-# ejecuciones(pruebasJMX())       
-     
-errorMax=float(input('Ingrese cantidad de errores maximo permitido (%): '))
-print()
-tiempoMax=float(input('Ingrese tiempo de espera maximo (seg): '))
-cls()
+        input()
 
-archivos=archivo()
+archivos=archivoJMX()          
+print(archivos)
+ejecuciones(archivos)
 
-diccionario_archivo={}
-
+archivos=archivoCSV()
 for archivo in archivos:
-    diccionario_archivo[archivo]=[]
-    diccionario_archivo[archivo]=obtenerDatos(archivo)            
-
-mostrarDatos(diccionario_archivo)
-
-print('Gracias por utilizarme!!')
-input('Enter para finalizar')
+    print('\33[2;31m'+archivo+'\033[0m')
+    print()
+    obtenerDatosCMD(archivo)       
+    cls()
