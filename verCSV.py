@@ -95,8 +95,34 @@ def obtenerDatosCMD(archivo):
             print()
             print()
             print('\33[4m'+'Elapsed average:'+'\033[0m ',sum/len(prueba[item][1]))
-            
+            print()
+            print('\33[4m'+'Response Code values:'+'\033[0m ', end='')
+            for num in prueba[item][2]:
+                print(num, end=' ')
+            print()
+            print()
+            print('\33[4m'+'Response Message values:'+'\033[0m ', end='')
+            for num in prueba[item][3]:
+                print(num, end=' ')
+            print()
+            print()
+            print('\33[4m'+'Succes values:'+'\033[0m ', end='')
+            for num in prueba[item][5]:
+                print(num, end=' ')
+            print()
+            print()
+            print('\33[4m'+'Failure Message values:'+'\033[0m ', end='')
+            for num in prueba[item][2]:
+                print(num, end=' ')
+            print()
+            print()
+            print('\33[4m'+'IdleTime values:'+'\033[0m ', end='')
+            for num in prueba[item][13]:
+                print(num, end=' ')
+            print()
+            print()
             input()
+            cls()
         input()
 
 archivos=archivoJMX()          
