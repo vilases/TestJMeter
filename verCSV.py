@@ -22,7 +22,8 @@ def pruebasJMX():
 def ejecuciones(archivos):
     rutaPruebas=os.getcwd().replace('\\','/')
     print(rutaPruebas)
-    rutaJMeter=input('Escriba la ruta donde esta el ejecutable de JMeter: ').replace('\\',"/")
+    #rutaJMeter=input('Escriba la ruta donde esta el ejecutable de JMeter: ').replace('\\',"/")
+    rutaJMeter="C:/apache-jmeter-5.6.3/bin"
     for archivo in archivos:
         os.system(rutaJMeter+'/jmeter -n -t '+rutaPruebas+'/'+archivo+' -l '+rutaPruebas+'/'+archivo.replace('.jmx','.csv'))        
 
